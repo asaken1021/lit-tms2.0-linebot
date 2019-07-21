@@ -72,9 +72,9 @@ post '/webhook' do
           nonce: event['link']['nonce'],
           userId: userID
         }.to_json
-        https = Net::HTTP.new(BotURI.host, BotURI.port)
+        https = Net::HTTP.new(TMSURI.host, TMSURI.port)
         https.use_ssl = true
-        req = Net::HTTP::Post.new(BotURI)
+        req = Net::HTTP::Post.new(TMSURI)
         req.body = data
         req['Content-Type'] = "application/json"
         req['Accept'] = "application/json"
