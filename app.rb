@@ -23,6 +23,7 @@ post '/send_notify' do
     text: params[:message]
   }
   client.push_message(params[:to], message)
+  logger.info request.body
   logger.info params[:to]
   logger.info message
 end
