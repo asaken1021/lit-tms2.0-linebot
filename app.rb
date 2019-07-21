@@ -15,6 +15,10 @@ def client
   }
 end
 
+post '/send_notify' do
+
+end
+
 post '/webhook' do
   body = request.body.read
 
@@ -33,7 +37,7 @@ post '/webhook' do
           type: 'text',
           text: event.message['text']
         }
-        client.reply_message(event['replyToken'], message)
+        client.reply_message(event['replyToken'], message + event.source['userId'])
       end
     end
   end
