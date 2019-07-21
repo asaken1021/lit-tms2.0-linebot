@@ -57,10 +57,9 @@ post '/webhook' do
           userID = event['source']['userId']
           linkTokenRes = client.create_link_token(userID)
           linkToken = linkTokenRes['linkToken']
-          binding.pry
           message = {
             type: 'text',
-            text: 'アカウント連携URL: ' + 'https://gcp2.asaken1021.net:50001/line_link?' + linkToken
+            text: 'アカウント連携URL: ' + 'https://gcp2.asaken1021.net:50001/line_link?' + linkToken.to_s
           }
           client.reply_message(event['replyToken'], message)
         end
