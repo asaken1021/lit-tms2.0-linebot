@@ -56,7 +56,7 @@ post '/webhook' do
         if event.message['text'] = '連携'
           userID = event['source']['userId']
           linkTokenResponse = client.create_link_token(userID)
-          linkToken = linkTokenResponse.body.to_json['linkToken']
+          linkToken = linkTokenResponse
           message = {
             type: 'text',
             text: 'アカウント連携URL: ' + 'https://gcp2.asaken1021.net:50001/line_link?' + linkToken
