@@ -16,7 +16,12 @@ def client
 end
 
 post '/send_notify' do
-
+  params = JSON.parse(request.body.read)
+  message = {
+    type: 'text',
+    text: params[:message]
+  }
+  client.push_message(params[:to], message)
 end
 
 post '/webhook' do
