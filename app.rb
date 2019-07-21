@@ -40,7 +40,7 @@ post '/webhook' do
       when Line::Bot::Event::MessageType::Text
         message = {
           type: 'text',
-          text: event.message['text'] + event['source']['userId']
+          text: event.message['text'] + '\r\n' + event['source']['userId']
         }
         client.reply_message(event['replyToken'], message)
       end
