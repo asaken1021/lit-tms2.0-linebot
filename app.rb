@@ -6,6 +6,11 @@ require 'line/bot'
 require 'logger'
 require 'json'
 
+require 'open-uri'
+require 'net/http'
+require 'webrick/https'
+require 'openssl'
+
 get '/' do
   erb :index
 end
@@ -19,15 +24,11 @@ end
 
 post '/send_notify' do
   request.body.rewind
-  logger.info request.body.read
   params = JSON.parse(request.body.string)
-  logger.info params
   message = {
     type: 'text',
     text: params['message']
   }
-  logger.info params['to']
-  logger.info message
   client.push_message(params['to'], message)
 end
 
@@ -52,6 +53,38 @@ post '/webhook' do
         }
         client.reply_message(event['replyToken'], message)
         end
+        if event.message['text'] = '連携'
+          userID = event['source']['userId']
+          linkTokenRes = client.create_link_token(userID)
+          linkToken = linkTokenRes['linkToken']
+          message = {
+            type: 'text',
+            text: 'アカウント連携URL: ' + 'https://gcp2.asaken1021.net:50001/line_link?' + linkToken
+          }
+          client.reply_message(event['replyToken'], message)
+        end
+      end
+    when Line::Bot::Event::AccountLink
+      if event['link']['result'] == 'ok'
+        userID = event['source']['userId']
+        TMSURI = URI('https://gcp2.asaken1021.net:50001/line_link_completed')
+        data = {
+          nonce: event['link']['nonce'],
+          userId: userID
+        }.to_json
+        https = Net::HTTP.new(BotURI.host, BotURI.port)
+        https.use_ssl = true
+        req = Net::HTTP::Post.new(BotURI)
+        req.body = data
+        req['Content-Type'] = "application/json"
+        req['Accept'] = "application/json"
+        res = https.request(req)
+
+        message = {
+          type: 'text',
+          text: 'アカウント連携が正常に完了しました。'
+        }
+        client.reply_message(event['replyToken'], message)
       end
     end
   end
