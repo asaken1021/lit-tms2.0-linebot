@@ -25,9 +25,9 @@ post '/send_notify' do
     type: 'text',
     text: params['message']
   }
-  client.push_message(params['to'], message)
-  logger.info params['to']
+  logger.info params
   logger.info message
+  client.push_message(params['to'], message)
 end
 
 post '/webhook' do
