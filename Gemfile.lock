@@ -3,17 +3,22 @@ GEM
   specs:
     ast (2.4.0)
     backports (3.15.0)
+    coderay (1.1.2)
     debase (0.2.3)
       debase-ruby_core_source (>= 0.10.2)
     debase-ruby_core_source (0.10.5)
     fastri (0.3.1.1)
     jaro_winkler (1.5.3)
     line-bot-api (1.12.0)
+    method_source (0.9.2)
     multi_json (1.13.1)
     mustermann (1.0.3)
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     rack (2.0.7)
     rack-protection (2.0.5)
       rack
@@ -52,6 +57,7 @@ DEPENDENCIES
   debase
   fastri
   line-bot-api
+  pry
   rcodetools
   rubocop
   ruby-debug-ide
