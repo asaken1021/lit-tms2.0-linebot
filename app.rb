@@ -21,7 +21,7 @@ post '/send_notify' do
   request.body.rewind
   logger.info request.body.read
   rbody = request.body.read
-  params = JSON.parse(rbody)
+  params = JSON.parse(rbody.to_json)
   logger.info params
   message = {
     type: 'text',
