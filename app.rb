@@ -4,6 +4,7 @@ require 'sinatra/reloader' if development?
 
 require 'line/bot'
 require 'logger'
+require 'json'
 
 get '/' do
   erb :index
