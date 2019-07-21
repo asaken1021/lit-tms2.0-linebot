@@ -74,6 +74,7 @@ post '/webhook' do
         }.to_json
         https = Net::HTTP.new(TMSURI.host, TMSURI.port)
         https.use_ssl = true
+        https.verify_mode = OpenSSL::SSL::VERIFY_NONE
         req = Net::HTTP::Post.new(TMSURI)
         req.body = data
         req['Content-Type'] = "application/json"
