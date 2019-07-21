@@ -45,11 +45,13 @@ post '/webhook' do
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
-        message = {
+        if event.message['text'] == 'checkmyid'
+          message = {
           type: 'text',
-          text: event.message['text'] + ' UserID:' + event['source']['userId']
+          text: 'あなたのユーザーID: ' + event['source']['userId']
         }
         client.reply_message(event['replyToken'], message)
+        end
       end
     end
   end
