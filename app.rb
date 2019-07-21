@@ -19,13 +19,13 @@ end
 
 post '/send_notify' do
   request.body.rewind
+  logger.info request.read
   params = JSON.parse request.body.read
   message = {
     type: 'text',
     text: params[:message]
   }
   client.push_message(params[:to], message)
-  logger.info request.read
   logger.info params[:to]
   logger.info message
 end
