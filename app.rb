@@ -21,7 +21,7 @@ post '/send_notify' do
   request.body.rewind
   logger.info request.body.read
   logger.info request.media_type
-  params = request.body.read
+  params = request.body.read.to_json
   logger.info params
   message = {
     type: 'text',
