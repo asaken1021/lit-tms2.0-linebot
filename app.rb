@@ -20,12 +20,12 @@ end
 post '/send_notify' do
   request.body.rewind
   logger.info request.body.read
-  params = JSON.parse(request.body.read.to_json)
+  params = request.body.read
+  logger.info params
   message = {
     type: 'text',
     text: params['message']
   }
-  logger.info params
   logger.info message
   client.push_message(params['to'], message)
 end
