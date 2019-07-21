@@ -8,6 +8,7 @@ GEM
     debase-ruby_core_source (0.10.5)
     fastri (0.3.1.1)
     jaro_winkler (1.5.3)
+    line-bot-api (1.12.0)
     multi_json (1.13.1)
     mustermann (1.0.3)
     parallel (1.17.0)
@@ -50,6 +51,7 @@ PLATFORMS
 DEPENDENCIES
   debase
   fastri
+  line-bot-api
   rcodetools
   rubocop
   ruby-debug-ide

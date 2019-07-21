@@ -9,3 +9,5 @@ gem 'fastri'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
+
+gem 'line-bot-api'
