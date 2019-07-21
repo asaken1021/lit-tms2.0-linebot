@@ -24,7 +24,7 @@ post '/send_notify' do
   }
   client.push_message(params[:to], message)
   logger.info "to: " + params[:to]
-  logger.info "message:" message
+  logger.info "message:" + message
 end
 
 post '/webhook' do
