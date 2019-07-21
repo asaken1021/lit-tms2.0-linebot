@@ -20,6 +20,7 @@ end
 post '/send_notify' do
   request.body.rewind
   logger.info request.body.read
+  logger.info request.media_type
   params = request.body.read
   logger.info params
   message = {
