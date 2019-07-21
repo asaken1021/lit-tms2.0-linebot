@@ -23,10 +23,10 @@ post '/send_notify' do
   params = JSON.parse(request.body.read.to_json)
   message = {
     type: 'text',
-    text: params[:message]
+    text: params['message']
   }
-  client.push_message(params[:to], message)
-  logger.info params[:to]
+  client.push_message(params['to'], message)
+  logger.info params['to']
   logger.info message
 end
 
