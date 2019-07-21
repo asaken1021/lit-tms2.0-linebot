@@ -37,7 +37,7 @@ post '/webhook' do
           type: 'text',
           text: event.message['text']
         }
-        client.reply_message(event['replyToken'], message + event['source']['userId'])
+        client.reply_message(event['replyToken'], message.concat(event['source']['userId'])
       end
     end
   end
