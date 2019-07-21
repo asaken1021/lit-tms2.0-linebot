@@ -56,7 +56,7 @@ post '/webhook' do
         if event.message['text'] = '連携'
           userID = event['source']['userId']
           linkTokenResponse = client.create_link_token(userID)
-          logger.info JSON.parse(linkTokenResponse.body)
+          logger.info JSON.parse(linkTokenResponse.body)['linkToken']
           linkToken = linkTokenResponse
           message = {
             type: 'text',
