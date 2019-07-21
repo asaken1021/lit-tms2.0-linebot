@@ -3,6 +3,7 @@ Bundler.require
 require 'sinatra/reloader' if development?
 
 require 'line/bot'
+require 'logger'
 
 get '/' do
   erb :index
@@ -22,6 +23,8 @@ post '/send_notify' do
     text: params[:message]
   }
   client.push_message(params[:to], message)
+  logger.info "to: " + params[:to]
+  logger.info "message:" message
 end
 
 post '/webhook' do
