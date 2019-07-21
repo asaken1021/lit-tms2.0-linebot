@@ -17,6 +17,7 @@ def client
 end
 
 post '/send_notify' do
+  request.body.rewind
   params = JSON.parse(request.body.read)
   message = {
     type: 'text',
