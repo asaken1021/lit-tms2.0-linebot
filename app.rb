@@ -19,7 +19,7 @@ end
 
 post '/send_notify' do
   request.body.rewind
-  params = JSON.parse(request.body.read)
+  params = JSON.parse request.body.read
   message = {
     type: 'text',
     text: params[:message]
