@@ -53,7 +53,7 @@ post '/webhook' do
         }
         client.reply_message(event['replyToken'], message)
         end
-        if event.message['text'] = '連携'
+        if event.message['text'] == '連携'
           userID = event['source']['userId']
           linkTokenResponse = client.create_link_token(userID)
           linkToken = JSON.parse(linkTokenResponse.body)['linkToken']
