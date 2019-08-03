@@ -10,6 +10,7 @@ require 'open-uri'
 require 'net/http'
 require 'webrick/https'
 require 'openssl'
+require 'resolv'
 
 get '/' do
   erb :index
@@ -23,13 +24,17 @@ def client
 end
 
 post '/send_notify' do
-  request.body.rewind
-  params = JSON.parse(request.body.string)
-  message = {
-    type: 'text',
-    text: params['message']
-  }
-  client.push_message(params['to'], message)
+  if request.remote_ip == Resolv.getaddress('gcp2.asaken1021.net')
+    request.body.rewind
+    params = JSON.parse(request.body.string)
+    message = {
+      type: 'text',
+      text: params['message']
+    }
+    client.push_message(params['to'], message)
+  else
+    error 400 do 'Bad Request' end
+  end
 end
 
 post '/webhook' do
