@@ -24,7 +24,7 @@ def client
 end
 
 post '/send_notify' do
-  if request.remote_ip == Resolv.getaddress('gcp2.asaken1021.net')
+  if request.ip == Resolv.getaddress('gcp2.asaken1021.net')
     request.body.rewind
     params = JSON.parse(request.body.string)
     message = {
