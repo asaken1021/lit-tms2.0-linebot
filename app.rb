@@ -33,7 +33,8 @@ post '/send_notify' do
     }
     client.push_message(params['to'], message)
   else
-    error 400 do 'Bad Request' end
+    status 400
+    body 'Bad Request'
   end
 end
 
