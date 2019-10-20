@@ -24,7 +24,7 @@ def client
 end
 
 post '/send_notify' do
-  if request.ip == Resolv.getaddress('gcp2.asaken1021.net')
+  if request.ip == Resolv.getaddress('home.asaken1021.net')
     request.body.rewind
     params = JSON.parse(request.body.string)
     message = {
@@ -65,7 +65,7 @@ post '/webhook' do
           linkToken = JSON.parse(linkTokenResponse.body)['linkToken']
           message = {
             type: 'text',
-            text: 'アカウント連携URL: ' + 'https://gcp2.asaken1021.net:50001/line_link?linkToken=' + linkToken
+            text: 'アカウント連携URL: ' + 'https://home.asaken1021.net:50001/line_link?linkToken=' + linkToken
           }
           client.reply_message(event['replyToken'], message)
         end
@@ -73,7 +73,7 @@ post '/webhook' do
     when Line::Bot::Event::AccountLink
       if event['link']['result'] == 'ok'
         userID = event['source']['userId']
-        TMSURI = URI('https://gcp2.asaken1021.net:50001/line_link_completed')
+        TMSURI = URI('https://home.asaken1021.net:50001/line_link_completed')
         data = {
           nonce: event['link']['nonce'],
           userId: userID
