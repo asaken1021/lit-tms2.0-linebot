@@ -65,7 +65,7 @@ post '/webhook' do
           linkToken = JSON.parse(linkTokenResponse.body)['linkToken']
           message = {
             type: 'text',
-            text: 'アカウント連携URL: ' + 'https://home.asaken1021.net:50080/line_link?linkToken=' + linkToken
+            text: 'アカウント連携URL: ' + 'https://cnh-1.asaken1021.net:50080/line_link?linkToken=' + linkToken
           }
           client.reply_message(event['replyToken'], message)
         end
