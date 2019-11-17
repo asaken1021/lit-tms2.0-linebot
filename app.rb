@@ -65,7 +65,7 @@ post '/webhook' do
           linkToken = JSON.parse(linkTokenResponse.body)['linkToken']
           message = {
             type: 'text',
-            text: 'アカウント連携URL: ' + 'https://cnh-1.asaken1021.net:50080/line_link?linkToken=' + linkToken
+            text: 'アカウント連携URL: ' + 'https://cnh-1.asaken1021.net:8080/line_link?linkToken=' + linkToken
           }
           client.reply_message(event['replyToken'], message)
         end
@@ -73,7 +73,7 @@ post '/webhook' do
     when Line::Bot::Event::AccountLink
       if event['link']['result'] == 'ok'
         userID = event['source']['userId']
-        TMSURI = URI('https://cnh-1.asaken1021.net:50080/line_link_completed')
+        TMSURI = URI('https://cnh-1.asaken1021.net:8080/line_link_completed')
         data = {
           nonce: event['link']['nonce'],
           userId: userID
