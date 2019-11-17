@@ -24,7 +24,7 @@ def client
 end
 
 post '/send_notify' do
-  if request.ip == Resolv.getaddress('home.asaken1021.net')
+  if request.ip == Resolv.getaddress('cnh-1.asaken1021.net')
     request.body.rewind
     params = JSON.parse(request.body.string)
     message = {
@@ -73,7 +73,7 @@ post '/webhook' do
     when Line::Bot::Event::AccountLink
       if event['link']['result'] == 'ok'
         userID = event['source']['userId']
-        TMSURI = URI('https://home.asaken1021.net:50080/line_link_completed')
+        TMSURI = URI('https://cnh-1.asaken1021.net:50080/line_link_completed')
         data = {
           nonce: event['link']['nonce'],
           userId: userID
