@@ -38,6 +38,22 @@ post '/send_notify' do
   end
 end
 
+post '/send_notify_progress_image' do
+  if request.ip == Resolv.getaddress('cnh-1.asaken1021.net')
+    request.body.rewind
+    params = JSON.parse(request.body.string)
+    message = {
+      type: 'image',
+      originalContentUrl: params['originalUrl'],
+      previewImageUrl: params['previewUrl']
+    }
+    client.push_message(params['to'], message)
+  else
+    status 400
+    body 'Bad Request'
+  end
+end
+
 post '/webhook' do
   body = request.body.read
 
