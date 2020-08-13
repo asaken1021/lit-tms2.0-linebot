@@ -24,7 +24,7 @@ def client
 end
 
 post '/send_notify' do
-  if request.ip == Resolv.getaddress('cnh-1.asaken1021.net')
+  if request.ip == Resolv.getaddress('tms.asaken1021.net')
     request.body.rewind
     params = JSON.parse(request.body.string)
     message = {
@@ -39,7 +39,7 @@ post '/send_notify' do
 end
 
 post '/send_notify_progress_image' do
-  if request.ip == Resolv.getaddress('cnh-1.asaken1021.net')
+  if request.ip == Resolv.getaddress('tms.asaken1021.net')
     request.body.rewind
     params = JSON.parse(request.body.string)
     message = {
@@ -81,7 +81,7 @@ post '/webhook' do
           linkToken = JSON.parse(linkTokenResponse.body)['linkToken']
           message = {
             type: 'text',
-            text: 'アカウント連携URL: ' + 'https://cnh-1.asaken1021.net:8080/line_link?linkToken=' + linkToken
+            text: 'アカウント連携URL: ' + 'https://tms.asaken1021.net/line_link?linkToken=' + linkToken
           }
           client.reply_message(event['replyToken'], message)
         end
@@ -89,7 +89,7 @@ post '/webhook' do
     when Line::Bot::Event::AccountLink
       if event['link']['result'] == 'ok'
         userID = event['source']['userId']
-        TMSURI = URI('https://cnh-1.asaken1021.net:8080/line_link_completed')
+        TMSURI = URI('https://tms.asaken1021.net/line_link_completed')
         data = {
           nonce: event['link']['nonce'],
           userId: userID
