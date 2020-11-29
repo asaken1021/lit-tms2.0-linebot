@@ -24,7 +24,7 @@ def client
 end
 
 post '/send_notify' do
-  if request.ip == Resolv.getaddress('tms.asaken1021.net')
+  if request.ip == Resolv.getaddress('vuejs.tms.asaken1021.net')
     request.body.rewind
     params = JSON.parse(request.body.string)
     message = {
@@ -39,7 +39,7 @@ post '/send_notify' do
 end
 
 post '/send_notify_progress_image' do
-  if request.ip == Resolv.getaddress('tms.asaken1021.net')
+  if request.ip == Resolv.getaddress('vuejs.tms.asaken1021.net')
     request.body.rewind
     params = JSON.parse(request.body.string)
     message = {
@@ -81,7 +81,7 @@ post '/webhook' do
           linkToken = JSON.parse(linkTokenResponse.body)['linkToken']
           message = {
             type: 'text',
-            text: 'アカウント連携URL: ' + 'https://tms.asaken1021.net/line_link?linkToken=' + linkToken
+            text: 'アカウント連携URL: ' + 'https://vuejs.tms.asaken1021.net/line_link?linkToken=' + linkToken
           }
           client.reply_message(event['replyToken'], message)
         end
@@ -89,15 +89,15 @@ post '/webhook' do
     when Line::Bot::Event::AccountLink
       if event['link']['result'] == 'ok'
         userID = event['source']['userId']
-        TMSURI = URI('https://tms.asaken1021.net/line_link_completed')
+        TMSURI = URI('https://vuejs.tms.asaken1021.net/line_link')
         data = {
           nonce: event['link']['nonce'],
-          userId: userID
+          user_id: userID
         }.to_json
         https = Net::HTTP.new(TMSURI.host, TMSURI.port)
         https.use_ssl = true
         https.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        req = Net::HTTP::Post.new(TMSURI)
+        req = Net::HTTP::Put.new(TMSURI)
         req.body = data
         req['Content-Type'] = "application/json"
         req['Accept'] = "application/json"
