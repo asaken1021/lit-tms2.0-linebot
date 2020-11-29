@@ -81,7 +81,7 @@ post '/webhook' do
           linkToken = JSON.parse(linkTokenResponse.body)['linkToken']
           message = {
             type: 'text',
-            text: 'アカウント連携URL: ' + 'https://vuejs.tms.asaken1021.net/line_link?linkToken=' + linkToken
+            text: 'アカウント連携URL: ' + 'https://vuejs.tms.asaken1021.net/line_link?link_token=' + linkToken
           }
           client.reply_message(event['replyToken'], message)
         end
